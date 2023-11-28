@@ -1,6 +1,6 @@
 # Français
 
-### Mise en place de l'environnement
+## Mise en place de l'environnement
 
 Pour configurer l'environnement de test, il vous faut un déploiment Docker fonctionnel. Vous pouvez utiliser [Docker Desktop](https://www.docker.com/products/docker-desktop/) sur Linux, Windows et Mac.
 
@@ -22,9 +22,17 @@ Pour éteindre l'environnement de test et supprimer toutes les données, exécut
 docker-compose -f docker/docker-compose.yaml down -v
 ```
 
-### Connexion à ClickHouse
+## Connexion à ClickHouse
 
-Pour vous connecter à ClickHouse, vous pouvez soit utiliser [DBeaver](https://dbeaver.io/) ou l'outil en ligne de commande [clickhouse-client](https://clickhouse.com/docs/en/interfaces/cli). L'outil en ligne de commande de ClickHouse ne foncitonne que sur Linux et Mac. Si vous êtes sur Windows, vous pouvez utiliser [WSL](https://learn.microsoft.com/fr-fr/windows/wsl/install)
+Pour vous connecter à ClickHouse, vous pouvez soit utiliser [DBeaver](https://dbeaver.io/) ou l'outil en ligne de commande [clickhouse-client](https://clickhouse.com/docs/en/interfaces/cli). L'outil en ligne de commande de ClickHouse ne fonctionne que sur Linux et Mac. Si vous êtes sur Windows, vous pouvez utiliser [WSL](https://learn.microsoft.com/fr-fr/windows/wsl/install).
+
+Une autre alternative consiste à prendre un invite de commande dans le conteneur qui exécute ClickHouse:
+
+```bash
+docker exec -it clickhouse bash
+```
+
+Priviligiez cette solution si elle est plus simple pour vous.
 
 Pour vous connecter à ClickHouse :
 
@@ -54,15 +62,13 @@ Query id: 3c7331d1-ba91-46bc-8121-5e71cf63d872
 
 ```
 
-### Inspecter les topics Kafka
+## Inspecter les topics Kafka
 
 Pour inspecter les topics Kafka, naviguez à la page http://localhost:8080 avec votre navigateur internet.
 
 # English
 
-## Français
-
-### Environment setup
+## Environment setup
 
 To configure the test environment, you need a functional Docker deployment. You can user [Docker Desktop](https://www.docker.com/products/docker-desktop/) on Linux, Windows and Mac.
 
@@ -87,6 +93,16 @@ docker-compose -f docker/docker-compose.yaml down -v
 ### Connect to ClickHouse
 
 To connect to ClickHouse, you can either use [DBeaver](https://dbeaver.io/) or the Command Line Interface [clickhouse-client](https://clickhouse.com/docs/en/interfaces/cli). The CLI is only available for Linux and Mac. If you are using Windows, check the [WSL](https://learn.microsoft.com/fr-fr/windows/wsl/install)
+
+Another alternative is to connect to the container executing ClickHouse:
+
+```bash
+docker exec -it clickhouse bash
+```
+
+Use this solution if it is simplier for you.
+
+Pour vous connecter à ClickHouse :
 
 To connect to ClickHouse, execute the following command:
 
@@ -116,6 +132,6 @@ Query id: 3c7331d1-ba91-46bc-8121-5e71cf63d872
 
 ```
 
-### Inspect Kafka topics
+## Inspect Kafka topics
 
 To inspect the Kafka topics, navigate to the page http://localhost:8080 with your browser.
