@@ -40,12 +40,6 @@
             <port>9181</port>
         </node>
     </zookeeper>
-    <macros>
-        <cluster>test_shard_localhost</cluster>
-        <shard>0</shard>
-        <replica>0</replica>
-        <kafka_brokers>kafka:9092</kafka_brokers>
-    </macros>
     <distributed_ddl>
         <path>/clickhouse/task_queue/ddl</path>
     </distributed_ddl>

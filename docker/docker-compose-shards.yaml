@@ -50,17 +50,18 @@ services:
     ports:
       - 9181:9181
 
-  clickhouse:
-    container_name: clickhouse
+  clickhouse-01:
+    container_name: clickhouse-01
     image: clickhouse/clickhouse-server:23.9
     ulimits:
       nofile: 262144
     volumes:
-      - clickhouse:/var/lib/clickhouse
-      - clickhouse_logs:/var/log/clickhouse-server
-      - clickhouse_backup:/var/lib/clickhouse/backups
-      - ./clickhouse/config.xml:/etc/clickhouse-server/config.d/config.xml
+      - clickhouse_01:/var/lib/clickhouse
+      - clickhouse_01_logs:/var/log/clickhouse-server
+      - clickhouse_01_backup:/var/lib/clickhouse/backups
+      - ./clickhouse/config-01.xml:/etc/clickhouse-server/config.d/config.xml
       - ./clickhouse/users.xml:/etc/clickhouse-server/users.d/users.xml
+      - ../schema.proto:/var/lib/clickhouse/format_schemas/schema.proto
     environment:
       - CLICKHOUSE_DB=default
       - CLICKHOUSE_USER=default
@@ -72,11 +73,37 @@ services:
     depends_on:
       - clickhouse-keeper
 
+  clickhouse-02:
+    container_name: clickhouse-02
+    image: clickhouse/clickhouse-server:23.9
+    ulimits:
+      nofile: 262144
+    volumes:
+      - clickhouse_02:/var/lib/clickhouse
+      - clickhouse_02_logs:/var/log/clickhouse-server
+      - clickhouse_02_backup:/var/lib/clickhouse/backups
+      - ./clickhouse/config-02.xml:/etc/clickhouse-server/config.d/config.xml
+      - ./clickhouse/users.xml:/etc/clickhouse-server/users.d/users.xml
+      - ../schema.proto:/var/lib/clickhouse/format_schemas/schema.proto
+    environment:
+      - CLICKHOUSE_DB=default
+      - CLICKHOUSE_USER=default
+      - CLICKHOUSE_PASSWORD=password
+      - CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1
+    ports:
+      - 8124:8123
+      - 9001:9000
+    depends_on:
+      - clickhouse-keeper
+
 volumes:
     systemdb:
     zookeeper:
     kafka:
-    clickhouse:
-    clickhouse_logs:
-    clickhouse_backup:
+    clickhouse_01:
+    clickhouse_01_logs:
+    clickhouse_01_backup:
+    clickhouse_02:
+    clickhouse_02_logs:
+    clickhouse_02_backup:
     clickhouse_keeper:

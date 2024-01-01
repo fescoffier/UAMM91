@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+message Event {
+  uint32 app_id = 1;
+  uint64 id = 2;
+  double timestamp = 3;
+  string user_id = 4;
+  string session_id = 5;
+  string url = 6;
+  string tag = 7;
+  repeated string tag_classes = 8;
+  repeated string tag_attributes_keys = 9;
+  repeated string tag_attributes_values = 10;
+};
